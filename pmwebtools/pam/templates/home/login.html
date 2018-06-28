@@ -1,0 +1,19 @@
+{% extends 'login_base.html' %}
+
+{% block body %}
+
+    <div class="container-fluid d-flex justify-content-center mt-5">
+        <form class="form-horizontal" method=POST action="">
+            {% csrf_token %}
+            <div class="form-group">
+                <output class="mb-4" type="text">
+                    Please login to continue
+                </output>
+                <input class="form-control mb-3" type="text" name="username" placeholder="username"/>
+                <input class="form-control mb-3" type="password" name="password" placeholder="password"/>
+                <button class="btn btn-success" type="submit">Login</button>
+                <!-- <button class="btn btn-primary">Register Now</button> -->
+            </div>
+        </form>
+    </div>
+{% endblock %}
