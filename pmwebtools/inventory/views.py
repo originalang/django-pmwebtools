@@ -30,7 +30,7 @@ class DepartmentCreate(LoginRequiredMixin, CreateView):
 class ManagedStockCreate(LoginRequiredMixin, CreateView):
 	login_url = 'pam:login'
 	model = managed_stock
-	fields = ['stock_id', 'stock_name', 'threshold', 'inventory_url']
+	fields = ['stock_id', 'stock_name', 'threshold']
 
 	def form_valid(self, form):
 		form.instance.department_id = self.kwargs['pk']
@@ -46,7 +46,7 @@ class DepartmentUpdate(LoginRequiredMixin, UpdateView):
 class ManagedStockUpdate(LoginRequiredMixin, UpdateView):
 	login_url = 'pam:login'
 	model = managed_stock
-	fields = ['stock_id', 'stock_name', 'threshold', 'inventory_url']
+	fields = ['stock_id', 'stock_name', 'threshold']
 
 
 class DepartmentDelete(LoginRequiredMixin, DeleteView):
