@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Manage Departments{% endblock %}
+
+{% block body %}
+	<h1>Departments</h1>
+	<a class="btn btn-sm d-inline-block" href="{% url 'inventory:department-add' %}">
+		<i class="fas fa-plus"></i>&nbsp; Add Department
+	</a>
+	<div class="container-fluid">
+	{% for dep in object_list %}
+		<div class="d-inline-block card m-3" style="width:200px">
+			<div class="card-body">
+				<h4 class="card-title">{{ dep.department_name }}</h4>
+				<p>
+					<div class="card-text">{{ dep.contact_name }}</div>
+					<div class="card-text">{{ dep.contact_phone }}</div>
+					<div class="card-text">{{ dep.contact_email }}</div>
+				</p>
+				<span class="btn-group">
+					<a class="btn btn-sm btn-dark mr-1" href="{% url 'inventory:stock_detail' dep.id %}">View Stocks</a>
+					<a class="btn btn-sm btn-dark mr-1" href="{% url 'inventory:department-update' dep.id %}">
+						<i class="fas fa-pen-square"></i>
+					</a>
+					<form action="{% url 'inventory:department-delete' dep.id %}" method="post">
+						{% csrf_token %}
+						<input type="hidden" name="department_id" value="{{ dep.id }}">
+						<button type="submit" class="btn btn-sm btn-danger mr-1"><i class="fas fa-trash-alt"></i></button>
+					</form>
+				</span>
+			</div>
+		</div>
+	{% endfor %}
+	</div>
+{% endblock %}

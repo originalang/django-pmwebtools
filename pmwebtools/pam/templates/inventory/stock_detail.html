@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title%} {{ department.department_name }} {% endblock %}
+
+{% block body%}
+	<div class="container-fluid d-inline-block">
+		<div class="d-inline-block card m-3" style="width:200px">
+			<div class="card-body">
+				<h4 class="card-title">{{ department.department_name }}</h4>
+				<p>
+					<div class="card-text">{{ department.contact_name }}</div>
+					<div class="card-text">{{ department.contact_phone }}</div>
+					<div class="card-text">{{ department.contact_email }}</div>
+				</p>
+			</div>
+		</div>
+
+		<a href="{% url 'inventory:stock-add' department.id %}">
+			<i class="fas fa-plus"></i>&nbsp;Add Stock
+		</a><br>
+
+		<div class="container-fluid d-inline-block">
+			<table class="table table-hover">
+				<thead class="thead-dark">
+					<tr>
+						<th scope="col-md-2">Name</th>
+						<th scope="col-md-2">ID</th>
+						<th scope="col-md-2">Threshold</th>
+						<th scope="col-md-2">Current Stock</th>
+						<th scope="col-md-2"></th>
+						<th scope="col-md-2"></th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for stock in department.managed_stock_set.all %}
+							<tr>
+								<td>{{ stock.stock_name }}</td>
+								<td>{{ stock.stock_id }}</td>
+								<td>{{ stock.threshold }}</td>
+								<td>{{ stock.current_inventory }}</td>
+								<td>
+									<a class="btn btn-sm btn-dark mr-1" href="{% url 'inventory:stock-update' stock.id %}">
+										<i class="fas fa-pen-square"></i>
+									</a>
+								</td>
+								<td>
+									<form action="{% url 'inventory:stock-delete' stock.id %}" method="post">
+									{% csrf_token %}
+										<input type="hidden" name="stock_id" value="{{ stock.id }}">
+										<button type="submit" class="btn btn-sm btn-danger mr-1"><i class="fas fa-trash-alt"></i>
+										</button>
+									</form>
+								</td>
+							</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+{% endblock %}
