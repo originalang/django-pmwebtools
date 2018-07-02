@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block body %}
+	<div class="container-fluid">
+		<h1>{{ theme_query.theme_name }}	&nbsp;
+		</h1>
+		<a href="{% url 'repository:theme_index' %}"><< All Themes</a>
+		<hr/>
+		<form method="GET" class="d-inline-block mb-4">
+			<div class="input-group">
+				<input type="text" class="form-control" name="search_topics" placeholder="Search Topics" value="{{ query }}">
+				&nbsp; &nbsp;
+				<div class="input-group-btn">
+					<button type="submit" class="btn btn-success">Search</button>
+				</div>
+			</div>
+		</form>
+		&nbsp; &nbsp;
+		<div class="d-inline-block mb-4">
+			<a class="btn btn-sm btn-dark" href="{% url 'repository:create-topic' theme_query.id %}">
+				<i class="fas fa-plus"></i>
+			</a>
+		</div>
+		<div class="d-inline-block mb-4">
+			<a class="btn btn-sm btn-dark" href="{% url 'repository:update-theme' theme_query.id %}">
+				<i class="fas fa-pen-square"></i>
+			</a>
+		</div>
+		<div class="d-inline-block mb-4">
+			<form method="post" action="{% url 'repository:delete-theme' theme_query.id %}">
+				{% csrf_token %}
+				<input type="hidden" name="theme_id" value="{{ theme_query.id }}">
+				<button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i>
+				</button>
+			</form>
+		</div>
+
+
+		{% for topic in topic_queryset %}
+			<a class="list-group-item list-group-item-action list-group-head" href="{% url 'repository:topic_detail' topic.id %}">
+				<div>
+					<h5>{{ topic.topic_title }}</h5>
+					<p>{{ topic.topic_description_preview | safe }}</p>
+				</div>
+			</a>
+		{% endfor %}
+	</div>
+{% endblock %}

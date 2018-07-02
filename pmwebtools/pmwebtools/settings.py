@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'repository.apps.RepositoryConfig',
     'wide_format_pricing.apps.WideFormatPricingConfig',
     'inventory.apps.InventoryConfig',
     'pam.apps.PamConfig',
@@ -40,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'tinymce',
 ]
 
 MIDDLEWARE = [

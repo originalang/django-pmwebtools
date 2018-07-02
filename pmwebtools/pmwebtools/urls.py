@@ -21,4 +21,6 @@ urlpatterns = [
     path('', include('pam.urls')),
     path('inventory/', include('inventory.urls')),
     path('wf/', include('wide_format_pricing.urls')),
+    re_path(r'^tinymce/', include('tinymce.urls')),
+    path('repository/', include('repository.urls')),
 ]

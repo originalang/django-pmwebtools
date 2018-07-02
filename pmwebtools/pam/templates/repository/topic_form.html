@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Add a new Topic{% endblock %}
+
+{% block head %} {{ form.media }} {% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+	<div class="col-sm-10">
+		<form class="form-horizontal" action="" method="post">
+			{% csrf_token %}
+			{% include 'repository/form_template.html' %}
+			<div class="form-group">
+				<div class="col-smoffset-2 col-sm-10">
+					<button type="submit" class="btn btn-success">Add</button>
+				</div>
+			</div>		
+		</form>
+	</div>
+</div>
+{% endblock %}

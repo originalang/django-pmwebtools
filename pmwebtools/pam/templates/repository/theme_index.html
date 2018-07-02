@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block body %}
+	<div class="container-fluid">
+		<h1>
+			Themes &nbsp;
+		</h1>
+		<hr/>
+		<form method="GET" class="mb-4">
+			<div class="input-group">
+				<input type="text" class="form-control col-sm-3" name="search_themes" placeholder="Search Themes" value="{{ query }}">
+				<span class="input-group-btn">
+					&nbsp; &nbsp;<button type="submit" class="btn btn-success">Search</button>
+				</span>
+				&nbsp; &nbsp;
+				<a class="btn btn-sm btn-dark mr-1 mb-2" href="{% url 'repository:create-theme' %}">
+					<i class="fas fa-plus"></i>
+				</a>
+			</div>
+		</form>
+		<div class="list-group">
+			{% for theme in theme_queryset %}
+				<a class="list-group-item list-group-item-action" href="{% url 'repository:topic_index' theme.id %}">
+					<span class="badge border border-success" style="padding: 9px">{{ theme.tag }}</span>
+					&nbsp;
+					{{ theme }}
+					<span class="badge badge-success float-right" style="padding: 9px">{{ theme.number_of_topics }}</span>
+				</a>
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}
