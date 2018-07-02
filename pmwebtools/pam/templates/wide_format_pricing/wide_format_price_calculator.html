@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <div class="container-fluid">
+        <h1>WF Calulator</h1>
+        <a href="{% url 'wide_format_pricing:price-display' %}">Change Default Printing cost</a><br />
+        <a href="{% url 'wide_format_pricing:base-price-display' %}">Change Default Base Price</a><br />
+        <a href="{% url 'wide_format_pricing:non-profit-markup-display' %}">Change Default Non-Profit Markup</a><br />
+        <a href="{% url 'wide_format_pricing:profit-markup-display' %}">Change Default Profit Markup</a><br />
+
+
+        <form action="{% url 'wide_format_pricing:calculate-price' %}" method="POST">
+            {% csrf_token %}
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label text-right" for="customer-classification">Customer Classification</label>
+                <div class="col-sm-9">
+                    <select class="form-control" name="customer-classification">
+                        <option>Internal</option>
+                        <option>Non-Profit</option>
+                        <option>Profit</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label text-right" for="paper-type">Paper Type</label>
+                <div class="col-sm-9">
+                    <select class="form-control" name="paper-type">
+                        {% for paper in paper_types_list %}
+                            <option>{{ paper.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label text-right" for="height">Height</label>
+                <div class="col-sm-3">
+                    <input class="form-control" type="text" name="height">
+                </div>
+                <label class="col-sm-1 col-form-label text-right" for="width">Width</label>
+                <div class="col-sm-3">
+                    <input class="form-control" type="text" name="width">
+                </div>
+                <div class="col-sm-2">
+                    <select class="form-control" name="measure">
+                        <option>Inches</option>
+                        <option>Feet</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label text-right" for="quantity">Quantity</label>
+                <div class="col-sm-9">
+                    <input class="form-control" type="text" name="quantity">
+                </div>
+            </div>
+            <button class="btn btn-primary" type="submit">Submit</button>
+        </form>
+    </div>
+{% endblock %}

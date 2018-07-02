@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <h1>Change Default Print Price</h1>
+    <div class="container-fluid">
+        <table class="table table-hover">
+            <tr class="thead-dark">
+                <th>Date Created</th>
+                <th>
+                    Paper Type
+                </th>
+                <th>
+                    Cost
+                </th>
+                <th>
+                    Cost Context
+                </th>
+                <th>
+                    Default
+                </th>
+            </tr>
+            {% for price in object_list %}
+                <tr>
+                    <td>{{ price.created_date }}</td>
+                    <td>
+                        {{ price.paper_type }}
+                    </td>
+                    <td>
+                        {{ price.cost }}
+                    </td>
+                    <td>
+                        {{ price.cost_context }}
+                    </td>
+                    <td>
+                        {% if price.is_default %}
+                            <input type="checkbox" checked="checked" disabled />
+                        {% else %}
+                            <input type="checkbox" disabled />
+                            <sup><a href="{% url 'wide_format_pricing:change-default' object='print_price' pk=price.id rev='price-display' %}">Make Default</a></sup>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <h1>Change Default Profit Markup</h1>
+    <div class="container-fluid">
+        <table class="table table-hover">
+            <tr class="thead-dark">
+                <th>Date Created</th>
+                <th>
+                    Markup
+                </th>
+                <th>
+                    Default
+                </th>
+
+            </tr>
+            {% for markup in object_list %}
+                <tr>
+                    <td>{{ markup.created_date }}</td>
+                    <td>
+                        {{ markup.markup_percent }}
+                    </td>
+                    <td>
+                        {% if markup.is_default %}
+                            <input type="checkbox" checked="checked" disabled />
+                        {% else %}
+                            <input type="checkbox" disabled />
+                            <sup><a href="{% url 'wide_format_pricing:change-default' object='profit_markup' pk=markup.id rev='profit-markup-display' %}">Make Default</a></sup>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

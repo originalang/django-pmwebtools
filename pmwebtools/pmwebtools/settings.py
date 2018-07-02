@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'wide_format_pricing.apps.WideFormatPricingConfig',
     'inventory.apps.InventoryConfig',
     'pam.apps.PamConfig',
     'django.contrib.admin',

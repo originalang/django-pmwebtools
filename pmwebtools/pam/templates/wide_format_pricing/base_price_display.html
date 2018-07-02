@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <h1>Change Default Base Price</h1>
+    <div class="container-fluid">
+        <table class="table table-hover">
+            <tr class="thead-dark">
+                <th>Date Created</th>
+                <th>
+                    Cost
+                </th>
+                <th>
+                    Default
+                </th>
+
+            </tr>
+            {% for price in object_list %}
+                <tr>
+                    <td>{{ price.created_date }}</td>
+                    <td>
+                        {{ price.base_price }}
+                    </td>
+                    <td>
+                        {% if price.is_default %}
+                            <input type="checkbox" checked="checked" disabled />
+                        {% else %}
+                            <input type="checkbox" disabled />
+                            <sup><a href="{% url 'wide_format_pricing:change-default' object='base_price' pk=price.id rev='base-price-display' %}">Make Default</a></sup>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

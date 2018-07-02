@@ -20,4 +20,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('pam.urls')),
     path('inventory/', include('inventory.urls')),
+    path('wf/', include('wide_format_pricing.urls')),
 ]
