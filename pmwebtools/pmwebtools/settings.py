@@ -30,6 +30,8 @@ SECRET_KEY = config['SETUP']['secret_key']
 DEBUG = True
 
 ALLOWED_HOSTS = []
+for key, path in config.items('HOST_LIST'):
+    ALLOWED_HOSTS.append(path)
 
 
 # Application definition
