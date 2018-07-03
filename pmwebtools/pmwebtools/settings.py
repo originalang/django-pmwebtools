@@ -11,16 +11,20 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+import configparser
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+config = configparser.ConfigParser()
+config.read(os.path.join(BASE_DIR, 'pmwebtools', 'settings_config.ini'))
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'nx-^t0$*yxbnw!424&z3m5u^71hx*-^#(8i4hl-yr_d$$z2+yo'
+SECRET_KEY = config['SETUP']['secret_key']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -31,6 +35,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'billing.apps.BillingConfig',
     'repository.apps.RepositoryConfig',
     'wide_format_pricing.apps.WideFormatPricingConfig',
     'inventory.apps.InventoryConfig',
@@ -124,3 +129,6 @@ USE_TZ = True
 
 STATIC_ROOT = os.path.abspath(os.path.join(BASE_DIR, 'pmwebtools', 'static'))
 STATIC_URL = '/static/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'

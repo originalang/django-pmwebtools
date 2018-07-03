@@ -31,9 +31,9 @@
 							Monthly Billing
 						</a>
 						<div class="dropdown-menu">
-							<a class="dropdown-item" href="#">Printing</a>
-							<a class="dropdown-item" href="#">Mailing</a>
-							<a class="dropdown-item" href="#">Historic Data</a>
+							<a class="dropdown-item" href="{% url 'billing:bill_print' %}">Printing</a>
+							<a class="dropdown-item" href="{% url 'billing:bill_mail' %}">Mailing</a>
+							<a class="dropdown-item" href="{% url 'billing:historic_billing_list' %}">Historic Data</a>
 						</div>
 					</li>
 					<li class="nav-item dropdown">

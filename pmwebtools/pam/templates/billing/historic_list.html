@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block body %}
+	<table class="table table-light table-hover">
+		<tr class="thead-dark">
+			<th>
+				Month
+			</th>
+			<th>
+				Year
+			</th>
+			<th>
+				Department
+			</th>
+			<th>
+				Amount
+			</th>
+			<th>
+				Rows
+			</th>
+			<th>
+				Excel File
+			</th>
+			<th>
+				Text File
+			</th>
+		</tr>
+		{% for record in object_list %}
+			<tr>
+				<td>
+					{{ record.month }}
+				</td>
+				<td>
+					{{ record.year }}
+				</td>
+				<td>
+					{{ record.department }}
+				</td>
+				<td>
+					{{ record.amount }}
+				</td>
+				<td>
+					{{ record.rows }}
+				</td>
+				<td>
+					<a class="btn btn-sm btn-dark mr-1" href="{% url 'billing:download_excel_file' record.id %}" >
+						<i class="fas fa-file-excel"></i>
+					</a>
+				</td>
+				<td>
+					<a class="btn btn-sm btn-dark mr-1" href="{% url 'billing:download_txt_file' record.id %}" >
+						<i class="fas fa-file-alt"></i>
+					</a>
+				</td>
+			</tr>
+		{% endfor %}
+	</table>
+{% endblock %}
